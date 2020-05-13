@@ -25,3 +25,17 @@ hs_err_pid*
 mysql-connector-java-*.jar
 payara-*.zip
 
+
+target
+*~
+bin
+*.idea
+*.iml
+*.eml
+.project
+.settings
+.classpath
+/target
+.springBeans
+nb-configuration.xml
+

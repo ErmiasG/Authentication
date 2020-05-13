@@ -1,0 +1,37 @@
+
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+Vagrant.configure(2) do |config|
+
+  config.vm.define "ldap" do |ldap|
+    ldap.vm.box = "ubuntu/bionic64"
+    ldap.vm.hostname = "ldap.example.com"
+    ldap.vm.network :forwarded_port, host: 8000, guest: 80
+    ldap.vm.network :forwarded_port, host: 1389, guest: 389
+    ldap.vm.network "private_network", ip: "192.168.10.21"
+    ldap.vm.provider "virtualbox" do |vb|
+      vb.linked_clone = true
+      vb.cpus = "1"
+      vb.memory = "1024"
+    end
+    ldap.vm.provision "shell", path: "hostes.sh"
+    ldap.vm.provision "shell", path: "LDAPServer/provision.sh"
+  end
+
+  config.vm.define "server" do |server|
+    server.vm.box = "ubuntu/bionic64"
+    server.vm.hostname = "server.example.com"
+    server.vm.network :forwarded_port, host: 8080, guest: 8080
+    server.vm.network :forwarded_port, host: 4848, guest: 4848
+    server.vm.network "private_network", ip: "192.168.10.22"
+    server.vm.provider "virtualbox" do |vb|
+      vb.linked_clone = true
+      vb.cpus = "2"
+      vb.memory = "4096"
+    end
+    server.vm.provision "shell", path: "hostes.sh"
+    server.vm.provision "shell", path: "GlassfishServer/provision.sh"
+  end
+
+end

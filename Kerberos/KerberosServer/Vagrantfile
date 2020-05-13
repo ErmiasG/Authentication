@@ -1,0 +1,20 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+Vagrant.configure(2) do |server|
+    server.vm.box = "ubuntu/xenial64"
+    server.vm.hostname = "server.example.com"
+    server.vm.network :forwarded_port, host: 8080, guest: 8080
+    server.vm.network :forwarded_port, host: 8181, guest: 8181
+    server.vm.network :forwarded_port, host: 4848, guest: 4848
+    server.vm.network :forwarded_port, host: 9009, guest: 9009
+    server.vm.network "private_network", ip: "192.168.56.22"
+    server.vm.provider "virtualbox" do |vb|
+      vb.linked_clone = true
+      vb.cpus = "2"
+      vb.memory = "4096"
+    end
+    #server.vm.provision "shell", path: "hostes.sh"
+    #server.vm.provision "shell", path: "server.sh"
+    #server.vm.provision "shell", path: "spnego/createServer.sh"
+  end

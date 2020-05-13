@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+<head>
+    <title>LDAP Test</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        /* Bordered form */
+        form {
+            border: 3px solid #f1f1f1;
+        }
+
+        /* Full-width inputs */
+        input[type=text], input[type=password] {
+            width: 100%;
+            padding: 12px 20px;
+            margin: 8px 0;
+            display: inline-block;
+            border: 1px solid #ccc;
+            box-sizing: border-box;
+        }
+
+        /* Set a style for all buttons */
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 14px 20px;
+            margin: 8px 0;
+            border: none;
+            cursor: pointer;
+            width: 100%;
+        }
+
+        /* Add a hover effect for buttons */
+        button:hover {
+            opacity: 0.8;
+        }
+
+        /* Add padding to containers */
+        .container {
+            padding: 16px;
+        }
+
+        .content-wrapper {
+            margin-top: 50px;
+            margin-right: auto;
+            margin-left: auto;
+            padding: 20px;
+            width: 400px;
+        }
+
+    </style>
+    <script>
+        function check(event) {
+            document.getElementById('message').innerHTML = "checking";
+
+            var url = "http://localhost:8080/ldap-0.1/api/auth/login";
+            var formBody = "username=" + document.getElementById('uname').value + "&password=" + document.getElementById('password').value;
+            var other_params = {
+                headers: {"content-type": "application/x-www-form-urlencoded"},
+                body: formBody,
+                method: "POST",
+                mode: "cors"
+            };
+
+            fetch(url, other_params).then(function (response) {
+                    if (response.ok) {
+                        console.log("Success");
+                    } else {
+                        throw new Error("Could not reach the API: " + response.statusText);
+                    }
+                    return response.json();
+                }).then(function (data) {
+                    console.log("data: ", data);
+                    document.getElementById("response").style.display = "block";
+                    document.getElementById("message").style.display = "none";
+                    document.getElementById("response").innerHTML = JSON.stringify(data, null, 2);
+                }).catch(function (error) {
+                    document.getElementById("response").style.display = "none";
+                    document.getElementById("message").style.display = "block";
+                    document.getElementById("message").innerHTML = error.message;
+                });
+            return false;
+        }
+    </script>
+</head>
+<body>
+<div class="content-wrapper">
+    <h2 style="text-align: center;">Welcome to LDAP test.</h2>
+    <form method="post" onsubmit="return check();">
+        <div class="container">
+            <label for="uname"><b>Username</b></label>
+            <input type="text" placeholder="Enter Username" name="uname" id="uname" required>
+            <label for="password"><b>Password</b></label>
+            <input type="password" placeholder="Enter Password" name="password" id="password" required>
+            <span id='message' style="display: none"></span>
+            <div id="response" style="display: none"></div>
+            <button type="submit">Login</button>
+        </div>
+    </form>
+</div>
+</body>
+</html>
