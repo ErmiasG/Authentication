@@ -1,0 +1,17 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+Vagrant.configure(2) do |server|
+    #server.vm.box = "ubuntu/xenial64"
+    server.vm.box = "bento/ubuntu-16.04"
+    server.vm.hostname = "glassfish"
+    server.vm.network :forwarded_port, host: 8080, guest: 8080
+    server.vm.network :forwarded_port, host: 3306, guest: 3306
+    server.vm.network "private_network", ip: "192.168.56.22"
+    server.vm.provider "virtualbox" do |vb|
+      vb.linked_clone = true
+      vb.cpus = "2"
+      vb.memory = "4096"
+    end
+    server.vm.provision "shell", path: "create-auth-server.sh"
+  end

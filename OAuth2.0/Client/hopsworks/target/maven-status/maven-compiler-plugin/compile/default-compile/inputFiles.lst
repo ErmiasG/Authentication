@@ -1,0 +1,10 @@
+/home/ermias/Projects/vagrant/OAuth2.0/Client/hopsworks/src/main/java/io/hops/hopsworks/entity/Person.java
+/home/ermias/Projects/vagrant/OAuth2.0/Client/hopsworks/src/main/java/io/hops/hopsworks/api/ProtectedResource.java
+/home/ermias/Projects/vagrant/OAuth2.0/Client/hopsworks/src/main/java/io/hops/hopsworks/facade/PersonFacade.java
+/home/ermias/Projects/vagrant/OAuth2.0/Client/hopsworks/src/main/java/io/hops/hopsworks/api/CrossOriginResourceSharingFilter.java
+/home/ermias/Projects/vagrant/OAuth2.0/Client/hopsworks/src/main/java/io/hops/hopsworks/api/UnprotectedResource.java
+/home/ermias/Projects/vagrant/OAuth2.0/Client/hopsworks/src/main/java/io/hops/hopsworks/facade/GroupsFacade.java
+/home/ermias/Projects/vagrant/OAuth2.0/Client/hopsworks/src/main/java/io/hops/hopsworks/facade/AbstractFacade.java
+/home/ermias/Projects/vagrant/OAuth2.0/Client/hopsworks/src/main/java/io/hops/hopsworks/api/ApplicationConfig.java
+/home/ermias/Projects/vagrant/OAuth2.0/Client/hopsworks/src/main/java/io/hops/hopsworks/api/AuthResource.java
+/home/ermias/Projects/vagrant/OAuth2.0/Client/hopsworks/src/main/java/io/hops/hopsworks/entity/Groups.java

@@ -1,0 +1,34 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+Vagrant.configure(2) do |config|
+  config.vm.define "server" do |server|
+    server.vm.box = "bento/ubuntu-16.04"
+      server.vm.hostname = "auth-server"
+      server.vm.network :forwarded_port, host: 8080, guest: 8080
+      server.vm.network :forwarded_port, host: 3306, guest: 3306
+      server.vm.network "private_network", ip: "192.168.56.22"
+      server.vm.provider "virtualbox" do |vb|
+        vb.linked_clone = true
+        vb.cpus = "2"
+        vb.memory = "4096"
+      end
+      server.vm.provision "shell", path: "Auth_Server/create-auth-server.sh"
+  end
+
+  config.vm.define "client" do |client|
+    client.vm.box = "bento/ubuntu-16.04"
+    client.vm.hostname = "hopsworks"
+    client.vm.network :forwarded_port, host: 8081, guest: 8080
+    client.vm.network :forwarded_port, host: 8181, guest: 8181
+    client.vm.network :forwarded_port, host: 4848, guest: 4848
+    client.vm.network :forwarded_port, host: 3307, guest: 3306
+    client.vm.network "private_network", ip: "192.168.56.23"
+    client.vm.provider "virtualbox" do |vb|
+      vb.linked_clone = true
+      vb.cpus = "2"
+      vb.memory = "4096"
+    end
+    client.vm.provision "shell", path: "Client/create-server.sh"
+  end
+end
