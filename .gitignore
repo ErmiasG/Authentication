@@ -39,3 +39,10 @@ bin
 .springBeans
 nb-configuration.xml
 
+**/.vagrant
+.vagrant
+*/.vagrant
+
+*/node_modules
+node_modules
+**/node_modules

@@ -1,0 +1,18 @@
+<?php
+$config = [
+    'example-userpass' => [
+        'exampleauth:UserPass',
+        'student:studentpass' => [
+            'uid' => ['student'],
+            'eduPersonAffiliation' => ['member', 'student'],
+        ],
+        'employee:employeepass' => [
+            'uid' => ['employee'],
+            'eduPersonAffiliation' => ['member', 'employee'],
+        ],
+        'ermiasg:ermiasgpass' => [
+            'uid' => ['ermiasg'],
+            'eduPersonAffiliation' => ['member', 'employee'],
+        ],
+    ],
+];

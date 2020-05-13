@@ -1,0 +1,20 @@
+
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+Vagrant.configure("2") do |config|
+    config.vm.box = "ubuntu/bionic64"
+    config.vm.hostname = 'idp.logicalclocks.com'
+
+    config.vm.network :forwarded_port, guest: 22, host: 10021, id: "ssh"
+    config.vm.network(:forwarded_port, {:guest=>80, :host=>80})
+    config.vm.network(:forwarded_port, {:guest=>443, :host=>443})
+    config.vm.network "private_network", ip: "192.168.10.21"
+    config.vm.provision "shell", path: "provision.sh"
+
+    config.vm.provider :virtualbox do |v|
+      v.customize ["modifyvm", :id, "--memory", 2048]
+      v.customize ["modifyvm", :id, "--cpus", "2"]
+    end
+
+end
